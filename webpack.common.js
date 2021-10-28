@@ -2,31 +2,45 @@ const path = require("path");
 
 // pluing needed to make sure that all output filname updated in index.html
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-    entry:{
-        main: "./src/js/index.js",
-        vender: "./src/vendor.js",
+    entry:["./src/js/main.js","./src/scss/main.scss"],
 
-    },
-
-    Plugin:[
-        new HtmlWebpackPlugin({title:"development,"}),
+    plugins:[
+        new HtmlWebpackPlugin({
+            template:"./src/index.html",
+            inject:true,
+        }),
+        new MiniCssExtractPlugin({filename:"[name][hash].css"}),
     ],
 
     module:{
-        rules:[,
+        rules:[
             {
-                test: /\html$/i,
+                test: /\.html$/i,
                 use:["html-loader"]
             },
             {
-                test: /\(svg|gif|png|jpg)/,
-                option:{
-                    name:"[name].[hash].[ext]",
-                    outputPath:"images"
-                }
-            }
+                test: /\.s[ac]ss$/i,
+                use:[
+                    MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader",
+                ]
+            },
+            // process different image type
+            {
+                test: /\.(svg|gif|png|jpeg|jpg)$/i,
+                use: {
+                    loader:"file-loader",               
+                     options:{
+                        filename:"[name][hash].[ext]",
+                        outputPath:"",
+                    }},
+
+            },
+
         ]
         
     },
@@ -34,6 +48,5 @@ module.exports = {
     output:{
         filename:"[name].bundle.js",
         path: path.resolve(__dirname,"dist"),
-        clean: true,
     }   
 }
