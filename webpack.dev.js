@@ -6,12 +6,14 @@ module.exports = WebpackMerge.merge(common,{
     mode: "development",
     target: "web",
 
-    devtool: "inline-source-map",
+    devtool: "source-map",
     devServer:{
         static: "./dist",
-        shot: true,
+        hot: true,
         historyApiFallback: true
     },
+
+    stats: "error-only",
 
 
     output:{

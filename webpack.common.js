@@ -1,18 +1,17 @@
 const path = require("path");
-
-// pluing needed to make sure that all output filname updated in index.html
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require("webpack");
 
 module.exports = {
-    entry:["./src/js/main.js","./src/scss/main.scss"],
+    entry:{
+        main:["./src/js/main","./src/scss/main.scss"]
+    },
 
     plugins:[
-        new HtmlWebpackPlugin({
-            template:"./src/index.html",
-            inject:true,
-        }),
+        new HtmlWebpackPlugin({template:"./src/index.html",inject:true,}),
         new MiniCssExtractPlugin({filename:"[name][hash].css"}),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 
     module:{
@@ -48,5 +47,6 @@ module.exports = {
     output:{
         filename:"[name].bundle.js",
         path: path.resolve(__dirname,"dist"),
+        publicPath: "/",
     }   
 }
