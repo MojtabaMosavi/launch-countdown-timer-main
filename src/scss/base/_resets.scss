@@ -1,0 +1,73 @@
+/*----------------------------------------*\
+    #resets 
+\*-----------------------------------------*/
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: initial;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+ul[role="list"] {
+  list-style: none;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  cursor: pointer;
+  &:focus {
+    outline: max(1px, 0.1em) dashed;
+    outline-offset: 0.25em;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+// outline when tabbed but not when hovered
+button {
+  cursor: pointer;
+  border: none;
+
+  &:focus {
+    outline: max(1px, 0.1em) dashed;
+    outline-offset: 0.25em;
+  }
+
+  &:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: max(1px, 0.1em) dashed;
+    outline-offset: 0.25em;
+  }
+}
+
+/* Remove all animations and transitions
+for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
