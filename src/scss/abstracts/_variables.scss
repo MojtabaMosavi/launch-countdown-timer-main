@@ -1,3 +1,4 @@
+@use "./functions:" as f;
 /*----------------------------------------*\
     #variables
 \*-----------------------------------------*/
@@ -12,7 +13,7 @@
   ---Very-dark-blue: hsl(234, 17%, 12%);
 
   // typography
-  --body-fontsize: 14px;
+  --body-fontsize: f.rem(14px);
   --font-weight-high: 700;
 }
 
