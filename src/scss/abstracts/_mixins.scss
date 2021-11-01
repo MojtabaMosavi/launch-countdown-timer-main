@@ -1,6 +1,10 @@
 @use "./functions";
 @use "./variables" as v;
 
+/*----------------------------------------*\
+    #mixins
+\*-----------------------------------------*/
+
 /// @param {propert} $al-con
 /// horisonetel orientation of items
 /// @param {property} $js-con
