@@ -1,0 +1,13 @@
+/*----------------------------------------*\
+    #helper classes
+\*-----------------------------------------*/
+
+.sr-only {
+  display: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(1px, 1px, 1px, 1px);
+  clip: inset(1px, 1px, 1px, 1px);
+  white-space: no-wrap;
+}
