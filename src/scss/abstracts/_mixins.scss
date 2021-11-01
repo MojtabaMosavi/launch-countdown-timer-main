@@ -1,0 +1,78 @@
+@use "./functions";
+@use "./variables" as v;
+
+/// @param {propert} $al-con
+/// horisonetel orientation of items
+/// @param {property} $js-con
+/// vertical orientation of items
+/// @param {property} $flex-d
+/// orientation of axis in the flex contaienr
+
+@mixin flexify($al-con: center, $js-con: space-between, $flex-d: row) {
+  display: flex;
+  justify-content: $js-con;
+  align-content: $al-con;
+  flex-direction: $flex-d;
+}
+
+/// @param {number} $rows
+/// number of rows
+/// @param {number} $columns
+/// number of columns
+/// @param {value} $al-items
+/// vertical orientation of item in the grid
+/// @param {value} $js-items
+/// horisontel orientation of item in the grid
+
+@mixin costomGrid($rows: 1, $columns: 1, $al-items: center, $js-items: center) {
+  display: grid;
+  grid-template-columns: repeat(1fr, $columns);
+  grid-template-rows: repeat(1fr, $rows);
+  align-items: $al-items;
+  justify-items: $js-items;
+}
+
+/// @param {number} $breakpoint
+/// defines a media query
+@mixin respond-to($breakpoint) {
+  @media screen and (min-width: map.get($map:v.$breakpoints,$key:breakpint)) {
+    @content;
+  }
+}
+
+/*!Mixin used for setting fluid properties such as typography and widths
+src = https://codepen.io/MadeByMike/pen/vNrvdZ?editors=0110
+//Renamed some variables
+*/
+
+/// used of setting fulid properties such as fontsize
+@mixin interpolate(
+  $properties,
+  $min-screen,
+  $max-screen,
+  $min-value,
+  $max-value
+) {
+  & {
+    @each $property in $properties {
+      #{$property}: $min-value;
+    }
+
+    @media screen and (min-width: $min-screen) {
+      @each $property in $properties {
+        #{$property}: functions.calc-interpolation(
+          $min-screen,
+          $min-value,
+          $max-screen,
+          $max-value
+        );
+      }
+    }
+
+    @media screen and (min-width: $max-screen) {
+      @each $property in $properties {
+        #{$property}: $max-value;
+      }
+    }
+  }
+}
