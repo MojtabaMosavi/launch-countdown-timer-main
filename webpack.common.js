@@ -31,13 +31,7 @@ module.exports = {
             // process different image type
             {
                 test: /\.(svg|gif|png|jpeg|jpg)$/i,
-                use: {
-                    loader:"file-loader",               
-                     options:{
-                        filename:"[name][hash].[ext]",
-                        outputPath:"",
-                    }},
-
+                type: "asset/resource",
             },
 
         ]
@@ -47,6 +41,5 @@ module.exports = {
     output:{
         filename:"[name].bundle.js",
         path: path.resolve(__dirname,"dist"),
-        publicPath: "/",
     }   
 }

@@ -9,19 +9,9 @@ module.exports = WebpackMerge.merge(common,{
 
     output:{
         filename: "[name].[contentHash].bundle.js",
-        path: path.resolve(__dirname,"dist")
-    },
-
-    optimization:{
-        minimizer: [new TerserPlugin(), ]
-    },
-
-    plugins:[ 
-        new TerserPlugin(),
-    ],
-
-    output:{
+        path: path.resolve(__dirname,"dist"),
         clean: true,
-    }
+
+    },
 
 })
