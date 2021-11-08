@@ -18,9 +18,12 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: var(--body-fontsize);
+  font-family: var(--main-font-family);
 }
 
-ul[role="list"] {
+ul,
+ol {
   list-style: none;
 }
 
