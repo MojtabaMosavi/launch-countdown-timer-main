@@ -2,6 +2,11 @@
     #helper classes
 \*-----------------------------------------*/
 
+.container {
+  max-width: 21rem;
+  margin: 0 auto;
+}
+
 .sr-only {
   display: absolute;
   width: 1px;
