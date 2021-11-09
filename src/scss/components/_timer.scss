@@ -1,3 +1,4 @@
+@use "../abstracts" as abs;
 @import "../abstracts/functions";
 /*----------------------------------------*\
     #timer 
@@ -12,7 +13,6 @@
 
   &__box {
     border-radius: 1rem;
-    max-width: rem(73px);
   }
 
   &__placeholder {
@@ -88,5 +88,39 @@
     padding-top: rem(12px);
     text-transform: uppercase;
     color: var(--Grayish-blue);
+  }
+
+  /*tablet view------------------------------*/
+  @include abs.respond-to("tablet") {
+    justify-items: start;
+    grid-gap: 0 1.625rem;
+
+    &__placeholder {
+      min-width: rem(150px);
+      min-height: rem(135px);
+      box-shadow: 0 rem(8px) var(--Very-dark-blue);
+
+      &::before,
+      &::after {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+    }
+
+    &__top-section,
+    &__bottom-section {
+      font-size: 5.125rem;
+    }
+
+    &__top-section {
+      box-shadow: 0 6px 13px -4px var(--Very-dark-blue),
+        inset 0 2px 0 var(--Very-dark-blue);
+    }
+
+    &__title {
+      font-size: 1rem;
+      letter-spacing: rem(4px);
+      padding-top: 1.75rem;
+    }
   }
 }
