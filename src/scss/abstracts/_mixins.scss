@@ -39,7 +39,7 @@
 /// @param {number} $breakpoint
 /// defines a media query
 @mixin respond-to($breakpoint) {
-  @media screen and (min-width: map.get($map:v.$breakpoints,$key:breakpint)) {
+  @media screen and (min-width: map-get($map:v.$breakpoints,$key:breakpint)) {
     @content;
   }
 }
