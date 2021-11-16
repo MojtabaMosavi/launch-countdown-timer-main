@@ -66,7 +66,8 @@ only use none-specific commit messages like "added some styles". A much better c
     2- the purpose of change
     3- dangers 
 ```
-###Bugs 
+###Bugs
+
 1- When content of a contaienr changes dynamically you have to acount for that when you writing styles for that contaienr. For instance if you set the content of each timer__box to a four or more digit number the content overflow. This problem could be migtigated using relative units like em.
 
 
