@@ -60,12 +60,14 @@ block{
 
 3- Commit history is really valuable asset for debugging purposes and a bunch of other reason therefore creating a logical and descriptive one is important. A bad practice is to 
 only use none-specific commit messages like "added some styles". A much better commit message has the following structure:
+```
   1-Subject 
   2- Body:
     1- what have you changed ?
     2- the purpose of change
     3- dangers 
-    
+```
+
 ```html
 <h1>Some HTML code I'm proud of</h1>
 ```
