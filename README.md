@@ -1,6 +1,3 @@
-# Frontend Mentor - Launch countdown timer solution
-
-This is a solution to the [Launch countdown timer challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
 ## Table of contents
 
@@ -16,7 +13,6 @@ This is a solution to the [Launch countdown timer challenge on Frontend Mentor](
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -26,19 +22,12 @@ Users should be able to:
 
 - See hover states for all interactive elements on the page
 - See a live countdown timer that ticks down every second (start the count at 14 days)
-- **Bonus**: When a number changes, make the card flip from the middle
+- When a number changes, make the card flip from the middle
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./design/desktop-design.jpg)
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
 
 ### Links
 
@@ -53,19 +42,28 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - CSS custom properties
 - Flexbox
 - CSS Grid
+- BEM 
+- JavaScript 
+- ScSS
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+1- Before this challenge the built tool that I used was parcel which is a module bundler with zero confgration but for this projcet I used webpack is the toatal opposite of parcel when is comes to configuation. While you could use default configuration which can save you alot of time I wanted to learn the inner working of webpack and configuring it for this project give a good grasp on basics like loader and entry files. I hade some issue making the HMR(Hot module replacement) work of htm file but it will make a good challenge for the next project.
 
-To see how you can add code snippets, see below:
+2- Being stratigiec about the way you import partials or functions in different namespaces can save you alot of typing/time. For instance if you use something like a function that converts pixel value to rem values you can import it once in you main entry file instead of importing is in each partial or having to use a namespace.
+```css 
+block{
+  padding: rem(a value)
+}
 
+3- Commit history is really valuable asset for debugging purposes and a bunch of other reason therefore creating a logical and descriptive one is important. A bad practice is to 
+only use none-specific commit messages like "added some styles". A much better commit message has the following structure:
+  1-Subject 
+  2- Body:
+    1- what have you changed ?
+    2- the purpose of change
+    3- dangers 
 ```html
 <h1>Some HTML code I'm proud of</h1>
 ```
