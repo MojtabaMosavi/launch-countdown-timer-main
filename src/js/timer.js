@@ -15,28 +15,43 @@ export const Timer=(function(){
 
 
     // variables 
-    let _days,_hours,_minutes,_seconds;
+    let _days,_hours,_minutes,_seconds,_diffInSeconds;
     const _flipDuration = 500;
     let _countDownFinished = false;
     let _currentDataInMillieSeconds = Date.now();
-
+    const intervals = []
+    
 
 
     //functions 
     function init(days=0,hours=0,minutes=0,seconds=0){
         setCountDownTime(days,hours,minutes,seconds);
         setCountDownContent(days,hours,minutes,seconds);
-        startCountDown();
+        _startCountDown();
     }
 
-
+    /**
+     * initilizes the the countdown variables 
+     * @param {days} days 
+     * @param {*hours} hours 
+     * @param {*minutes} minutes 
+     * @param {*seconds} seconds 
+     */
     function setCountDownTime(days,hours,minutes,seconds){
         _days = days;
         _hours = hours;
         _minutes = minutes;
-        _seconds = seconds;
+        _seconds = seconds +1 ;
     }
 
+
+    /**
+     * 
+     * @param {days} days 
+     * @param {*hours} hours 
+     * @param {*minutes} minutes 
+     * @param {* seconds} seconds 
+     */
     function setCountDownContent(days=0,hours=0,minutes=0,seconds=0){
         setElementContent(timerDTopSection,timerDBottomSection,days);
         setElementContent(timerHTopSection,timerHBottomSection,hours);
@@ -44,8 +59,12 @@ export const Timer=(function(){
         setElementContent(timerSTopSection,timerSBottomSection,seconds);
     }
 
-
-    function addFlipAnimation(tSection=null,duration=0){
+    /**
+     * 
+     * @param {tsection} tSection top-section of the timer__box
+     * @param {*duration} duration of the aniamtion 
+     */
+    function _addFlipAnimation(tSection=null,duration=0){
         tSection.classList.add("timer__top-section--active");
         setTimeout(()=>{
             tSection.classList.remove("timer__top-section--active");
@@ -62,7 +81,7 @@ export const Timer=(function(){
        const content = args.pop();
        for(let j=0; j !== args.length; j++){
            try{
-            args[j].innerHTML = content;
+            args[j].innerHTML = prependZero(content);
            }catch(error){
                console.log(error);
            }
@@ -72,116 +91,113 @@ export const Timer=(function(){
    // set the content of the box and animate it
     function setDays(days=0){
         setElementContent(timerDTopSection,timerDBottomSection,days);
-        addFlipAnimation(timerDTopSection,_flipDuration);
+        _addFlipAnimation(timerDTopSection,_flipDuration);
     }
 
     function setHours(hours=0){
         setElementContent(timerHTopSection,timerHBottomSection,hours);
-        addFlipAnimation(timerHTopSection,_flipDuration);
+        _addFlipAnimation(timerHTopSection,_flipDuration);
     }
 
     function setMinutes(minutes=0){
         setElementContent(timerMTopSection,timerMBottomSection,minutes);
-        addFlipAnimation(timerMTopSection,_flipDuration);
+        _addFlipAnimation(timerMTopSection,_flipDuration);
     }
 
     function setSeconds(seconds=0){
         setElementContent(timerSTopSection,timerSBottomSection,seconds);
-        addFlipAnimation(timerSTopSection,_flipDuration);
+        _addFlipAnimation(timerSTopSection,_flipDuration);
     }
 
-    function decreamentSecond(){
-        for(let j =_seconds; j >=0;j--){
-            let duraiton = _seconds
-            setTimeout(() => {
-                setSeconds(j)
-            }, ((duraiton-j))*1000);
-        }
-    }
-    
-
-    function decremeantMinut(){}
-
-    function decreamentHour(){}
-
-    function decreamentDay(){
-
-    }
+    /**
+     * 
+     * @returns total countdown time in milliesecond
+     */
     function getTotalMillieSeconds() {
         return  ((_days*24*3600) + (_hours *3600) + (_minutes * 60) + _seconds) * 1000
     }
 
+    /**
+     * 
+     * @param {time} time 
+     * @returns time with a leading zero if time < 10 
+     */
     function prependZero(time){
         return time < 10 ? `0${time}` : time;
     }
 
-    function calculateDiff(){
+    /**
+     * 
+     * @returns obejct containing the countdown time 
+     */
+    function calculateCountdownTime(){
         let currentDate = new Date();
         let _countdownDate = _currentDataInMillieSeconds + getTotalMillieSeconds();
-        let totalTimeInSeconds = Math.abs(_countdownDate - currentDate) / 1000 ;
+        _diffInSeconds = Math.abs(_countdownDate - currentDate) / 1000;
+        Math.floor(_diffInSeconds) === 0 ? _countDownFinished = true : null;
 
-        let days = Math.floor(totalTimeInSeconds / (3600 * 24));
-        let hours = Math.floor(totalTimeInSeconds/ 3600) % 24;
-        let minutes = Math.floor(totalTimeInSeconds / 60) % 60 ;
-        let seconds = Math.floor(totalTimeInSeconds) % 60;
-
+        let days = Math.floor(_diffInSeconds / (3600 * 24));
+        let hours = Math.floor(_diffInSeconds/ 3600) % 24;
+        let minutes = Math.floor(_diffInSeconds / 60) % 60 ;
+        let seconds = Math.floor(_diffInSeconds) % 60;
+        
         return {
-            days:prependZero(days),
-            hours:prependZero(hours),
-            minutes:prependZero(minutes),
-            seconds:prependZero(seconds)
+            days:days,
+            hours:hours,
+            minutes:minutes,
+            seconds:seconds
         }
     }
 
-    function startCountDown(){
-        const dayInterval = setInterval(() => {
-            const {days,hours} = calculateDiff();
-            (hours === "01") ? (setDays(days),setHours(hours)) : setDays(days)
-        }, 1000 * 3600 * 24);
+    function _startCountDown(){
 
-        const hourInterval = setInterval(() => {
-            const {hours,minutes} = calculateDiff();
-            (minutes === "01") ? (setHours(hours),setMinutes(minutes)) : setHours(hours);
-        }, 1000* 3600);
-
-        const minutInterval = setInterval(() => {
-            const {minutes,hours} = calculateDiff();
-            (minutes === "01") ? (setMinutes(minutes),setHours(hours)) : setMinutes(minutes);
-        }, 1000 * 60);
-
+        // updating the countdown 
         const secondInterval = setInterval(() => {
-            const {seconds,minutes} = calculateDiff();
+            const {days,seconds,minutes,hours} = calculateCountdownTime();
+
+            // update days 
+            (minutes === 59 && seconds === 59 && hours === 23) ? 
+            (setDays(days),setHours(hours),setMinutes(minutes),setSeconds(seconds)): 
             setSeconds(seconds);
+
+            // update hours 
+            (minutes === 59 && seconds === 58 && hours === 0) ? 
+            (setHours(hours),setMinutes(minutes),setSeconds(seconds)) : setSeconds(seconds);
+
+            // update minutes 
+            (seconds === 59) ? (setMinutes(minutes),setSeconds(seconds)): setSeconds(seconds);
+            
+            //update seconds  
+            setSeconds(seconds);
+
+            // terminating the countdown 
+            (_countDownFinished) ? terminateCountdown(): null;
+
         }, 1000 );
+        intervals.push(secondInterval);
 
     }
 
-    function terminate(){
-        
+    function terminateCountdown(){
+        intervals.forEach(interval => (
+            clearInterval(interval)
+        ))
     }
-
-    function print(){
-        console.log(_days)
-    }
-
-    function covertDaysToDHMS(){
-    }
-
-    function timerSetTime(){
-
-    }
-
-    function calculateTime(){
-
-    }
-
-
     // API 
     return {
         init:init,
         setCountDownTime:setCountDownTime,
-        startCountDown:startCountDown,
-        print:print,
-    }
+        prependZero: prependZero,
+        getTotalMillieSeconds:getTotalMillieSeconds,
+        terminateCountdown:terminateCountdown,
+        calculateCountdownTime:calculateCountdownTime,
+        setSeconds:setSeconds,
+        setMinutes:setMinutes,
+        setHours:setHours,
+        setDays:setDays,
+        setCountDownTime:setCountDownTime,
+        setElementContent:setElementContent,
+
+    }   
 
 })()
