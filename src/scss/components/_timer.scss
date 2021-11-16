@@ -10,6 +10,7 @@
   grid-gap: 0px rem(10px);
   justify-items: center;
   color: var(--White);
+  margin-bottom: 16.1rem;
 
   &__box {
     border-radius: 1rem;
@@ -36,7 +37,7 @@
       height: rem(8px);
       border-radius: 1rem;
       background: var(--Very-dark-blue);
-      top: 49%;
+      top: 50%;
       transform: translate(-50%, -50%);
       z-index: 10;
     }
@@ -94,6 +95,7 @@
   @include abs.respond-to("tablet") {
     justify-items: start;
     grid-gap: 0 1.625rem;
+    margin-bottom: 15.1rem;
 
     &__placeholder {
       min-width: rem(150px);
