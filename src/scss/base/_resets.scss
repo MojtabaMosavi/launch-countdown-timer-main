@@ -31,8 +31,9 @@ a,
 a:visited {
   text-decoration: none;
   cursor: pointer;
-  &:focus {
-    outline: max(1px, 0.1em) dashed;
+  &:focus,
+  &:hover {
+    outline: max(1px, 0.1em) dashed var(--White);
     outline-offset: 0.25em;
   }
 }
