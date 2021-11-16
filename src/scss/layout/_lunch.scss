@@ -1,0 +1,68 @@
+@use "../abstracts" as abs;
+@import "../abstracts/functions";
+/*----------------------------------------*\
+    #launch
+\*-----------------------------------------*/
+
+.launch {
+  padding-top: rem(141px);
+  text-align: center;
+  background: url("../assets/images/bg-stars.svg") no-repeat center,
+    url("../assets/images/pattern-hills.svg") no-repeat bottom
+      var(--Very-dark-blue-bg);
+  background-size: contain;
+
+  &__heading {
+    text-transform: uppercase;
+    word-spacing: rem(2px);
+    letter-spacing: rem(6px);
+    margin-bottom: rem(57px);
+    font-size: rem(18px);
+    font-weight: 700;
+    color: var(--White);
+  }
+
+  &__social {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(2rem, 2rem));
+    max-width: 9rem;
+    margin: 0 auto;
+    gap: 0 rem(24px);
+    padding-bottom: rem(39px);
+  }
+
+  &__icons-wrapper {
+    display: flex;
+  }
+
+  &__icon {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    &--facebook {
+      background: url("../assets/images/icon-facebook.svg") no-repeat center;
+    }
+    &--pinterest {
+      background: url("../assets/images/icon-pinterest.svg") no-repeat center;
+    }
+    &--instagram {
+      background: url("../assets/images/icon-instagram.svg") no-repeat center;
+    }
+
+    &:hover {
+      filter: invert(51%) sepia(43%) saturate(1420%) hue-rotate(309deg)
+        brightness(99%) contrast(99%);
+    }
+  }
+
+  /*tablet view-------------------------------*/
+  @include abs.respond-to("tablet") {
+    padding-top: 8.5rem;
+    padding-bottom: 4rem;
+
+    &__heading {
+      letter-spacing: rem(9.5px);
+      margin-bottom: 7rem;
+    }
+  }
+}
