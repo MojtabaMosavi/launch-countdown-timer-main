@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [https://launch-countdown-timer-main.netlify.app/](https://your-live-site-url.com)
+- Live Site URL: [https://launch-countdown-timer-main.netlify.app/](https://launch-countdown-timer-main.netlify.app/)
 
 ## My process
 
